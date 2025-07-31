@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Keyboard from "../components/Keyboard";
+import { AppHeader } from "../components/app-header";
 import { clearServiceWorkerCache, getCacheInfo } from "../lib/cache-utils";
 
 export default function HomePage() {
+  const { t } = useTranslation();
   const [glowingKeys, setGlowingKeys] = useState<string[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [typingSequence, setTypingSequence] = useState<string[]>([]);
@@ -61,13 +64,13 @@ export default function HomePage() {
         // Reload cache info after clearing
         const newInfo = await getCacheInfo();
         setCacheInfo(newInfo);
-        alert('Cache cleared successfully!');
+        alert(t('common.success'));
       } else {
-        alert('Failed to clear cache. Please try again.');
+        alert(t('common.error'));
       }
     } catch (error) {
       console.error('Error clearing cache:', error);
-      alert('Error clearing cache. Please try again.');
+      alert(t('common.error'));
     } finally {
       setIsClearingCache(false);
     }
@@ -75,45 +78,47 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <AppHeader />
+      
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold mb-4">BrainBox</h1>
-          <p className="text-xl text-gray-300 mb-8">Interactive Keyboard with Glowing Keys and Typing Animations</p>
+          <p className="text-xl text-gray-300 mb-8">{t('app.description')}</p>
 
           <div className="flex justify-center space-x-4 mb-8">
             <a href="/demo" className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg transition-colors">
-              View Full Demo
+              {t('navigation.demo')}
             </a>
             <a href="/examples" className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg transition-colors">
-              Examples
+              {t('navigation.examples')}
             </a>
             <button
               onClick={handleClearCache}
               disabled={isClearingCache}
               className="bg-red-600 hover:bg-red-700 disabled:bg-red-800 disabled:cursor-not-allowed px-6 py-3 rounded-lg transition-colors"
             >
-              {isClearingCache ? 'Clearing...' : 'Clear Cache'}
+              {isClearingCache ? t('app.loading') : t('app.delete')}
             </button>
           </div>
         </div>
 
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8">
-            <h2 className="text-2xl font-semibold mb-4">Features</h2>
+            <h2 className="text-2xl font-semibold mb-4">{t('common.welcome')}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
               <div className="p-4 bg-gray-800 rounded-lg">
-                <h3 className="font-semibold mb-2">Glowing Keys</h3>
+                <h3 className="font-semibold mb-2">{t('app.title')}</h3>
                 <p className="text-gray-300">
-                  Highlight individual keys or key combinations with a beautiful glow effect
+                  {t('app.description')}
                 </p>
               </div>
               <div className="p-4 bg-gray-800 rounded-lg">
-                <h3 className="font-semibold mb-2">Typing Animation</h3>
-                <p className="text-gray-300">Watch realistic typing animations with customizable speed and sequences</p>
+                <h3 className="font-semibold mb-2">{t('navigation.demo')}</h3>
+                <p className="text-gray-300">{t('common.welcome')}</p>
               </div>
               <div className="p-4 bg-gray-800 rounded-lg">
-                <h3 className="font-semibold mb-2">Interactive</h3>
-                <p className="text-gray-300">Fully responsive with hover effects and smooth transitions</p>
+                <h3 className="font-semibold mb-2">{t('navigation.examples')}</h3>
+                <p className="text-gray-300">{t('common.hello')}</p>
               </div>
             </div>
           </div>
@@ -127,11 +132,11 @@ export default function HomePage() {
         />
 
         <div className="text-center mt-8 text-sm text-gray-400">
-          <p>Watch the demo above - keys will glow and typing animation will play automatically</p>
+          <p>{t('common.welcome')} - {t('app.description')}</p>
           <div className="mt-4 p-4 bg-gray-800 rounded-lg max-w-md mx-auto">
-            <p className="text-xs text-gray-300 mb-2">Cache Status</p>
+            <p className="text-xs text-gray-300 mb-2">{t('app.loading')}</p>
             <p className="text-xs text-gray-400">
-              Active caches: {cacheInfo.cacheCount} 
+              {t('common.welcome')}: {cacheInfo.cacheCount} 
               {cacheInfo.cacheNames.length > 0 && (
                 <span className="block mt-1">
                   ({cacheInfo.cacheNames.join(', ')})

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "./ui/popover";
 import { useTranslation } from "react-i18next";
+import { useLanguage } from "../lib/language-context";
 
 interface LanguageSelectorProps {
-  value: "ID" | "EN" | "CN";
-  onChange: (value: "ID" | "EN" | "CN") => void;
+  value?: "ID" | "EN" | "CN";
+  onChange?: (value: "ID" | "EN" | "CN") => void;
 }
 
 const getLanguageDisplay = (language: "ID" | "EN" | "CN", t: (key: string) => string) => {
@@ -33,25 +34,54 @@ const getLanguageFlag = (language: "ID" | "EN" | "CN") => {
   }
 };
 
-export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onChange }) => {
-  const [open, setOpen] = useState(false);
-  const { t, i18n } = useTranslation();
+// Map language codes
+const languageMap = {
+  "ID": "id",
+  "EN": "en", 
+  "CN": "cn"
+} as const;
 
-  const handleLanguageSelect = (language: "ID" | "EN" | "CN") => {
-    // Map our language codes to i18next language codes
-    const languageMap = {
-      "ID": "id",
-      "EN": "en", 
-      "CN": "cn"
-    };
+const reverseLanguageMap = {
+  "id": "ID",
+  "en": "EN",
+  "cn": "CN"
+} as const;
+
+export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ 
+  value: propValue, 
+  onChange: propOnChange 
+}) => {
+  const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
+  const { language, setLanguage, isLoading } = useLanguage();
+
+  // Use context language if no prop provided
+  const currentLanguage = propValue || reverseLanguageMap[language as keyof typeof reverseLanguageMap] || "ID";
+
+  const handleLanguageSelect = (languageCode: "ID" | "EN" | "CN") => {
+    const mappedLanguage = languageMap[languageCode];
     
-    // Change the language if i18n is available
-    if (i18n && typeof i18n.changeLanguage === 'function') {
-      i18n.changeLanguage(languageMap[language]);
+    // Update context if no prop onChange provided
+    if (!propOnChange) {
+      setLanguage(mappedLanguage);
+    } else {
+      propOnChange(languageCode);
     }
-    onChange(language);
+    
     setOpen(false);
   };
+
+  if (isLoading) {
+    return (
+      <button 
+        type="button" 
+        className="px-4 py-2 rounded-md min-w-[120px] h-12 flex items-center justify-center text-left text-black hover:bg-gray-100 transition-colors mt-4"
+        disabled
+      >
+        Loading...
+      </button>
+    );
+  }
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -61,8 +91,8 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onCha
           className="px-4 py-2 rounded-md min-w-[120px] h-12 flex items-center justify-between text-left text-black hover:bg-gray-100 transition-colors mt-4"
         >
           <div className="flex items-center gap-2">
-            <span className="text-lg">{getLanguageFlag(value)}</span>
-            <span className="font-medium">{getLanguageDisplay(value, t)}</span>
+            <span className="text-lg">{getLanguageFlag(currentLanguage)}</span>
+            <span className="font-medium">{getLanguageDisplay(currentLanguage, t)}</span>
           </div>
           
         </button>
@@ -72,7 +102,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onCha
           <button
             type="button"
             className={`flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors ${
-              value === "ID" ? "bg-blue-50 text-blue-700" : "text-gray-700"
+              currentLanguage === "ID" ? "bg-blue-50 text-blue-700" : "text-gray-700"
             }`}
             onClick={() => handleLanguageSelect("ID")}
           >
@@ -82,7 +112,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onCha
           <button
             type="button"
             className={`flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors ${
-              value === "EN" ? "bg-blue-50 text-blue-700" : "text-gray-700"
+              currentLanguage === "EN" ? "bg-blue-50 text-blue-700" : "text-gray-700"
             }`}
             onClick={() => handleLanguageSelect("EN")}
           >
@@ -92,7 +122,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onCha
           <button
             type="button"
             className={`flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors ${
-              value === "CN" ? "bg-blue-50 text-blue-700" : "text-gray-700"
+              currentLanguage === "CN" ? "bg-blue-50 text-blue-700" : "text-gray-700"
             }`}
             onClick={() => handleLanguageSelect("CN")}
           >

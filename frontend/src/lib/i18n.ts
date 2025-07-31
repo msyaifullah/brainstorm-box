@@ -18,17 +18,34 @@ const resources = {
   },
 };
 
+// Get saved language from localStorage or default to 'id'
+const getSavedLanguage = (): string => {
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem('app-language');
+    if (saved && ['id', 'en', 'cn'].includes(saved)) {
+      return saved;
+    }
+  }
+  return 'id';
+};
+
 // Initialize i18n
 i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'id', // default language
+    lng: getSavedLanguage(), // Use saved language or default
     fallbackLng: 'id',
     debug: process.env.NODE_ENV === 'development',
     
     interpolation: {
       escapeValue: false, // React already escapes values
+    },
+    
+    // Add language detection
+    detection: {
+      order: ['localStorage', 'navigator'],
+      caches: ['localStorage'],
     },
   });
 

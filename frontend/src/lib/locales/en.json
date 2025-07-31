@@ -1,4 +1,45 @@
 {
+  "app": {
+    "title": "Interactive Keyboard Demo",
+    "description": "Interactive keyboard component demonstration",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "reset": "Reset",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "navigation": {
+    "home": "Home",
+    "demo": "Demo",
+    "examples": "Examples",
+    "terminal": "Terminal",
+    "flightDemo": "Flight Demo",
+    "destinationDemo": "Destination Demo"
+  },
+  "common": {
+    "welcome": "Welcome",
+    "hello": "Hello",
+    "goodbye": "Goodbye",
+    "thankYou": "Thank you",
+    "please": "Please",
+    "sorry": "Sorry",
+    "ok": "OK",
+    "done": "Done",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Operation completed successfully"
+  },
   "tripTypes": {
     "oneWay": "One Way",
     "roundTrip": "Round Trip",

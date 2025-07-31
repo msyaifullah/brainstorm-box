@@ -1,4 +1,45 @@
 {
+  "app": {
+    "title": "Demo Keyboard Interaktif",
+    "description": "Demonstrasi komponen keyboard interaktif",
+    "loading": "Memuat...",
+    "error": "Error",
+    "success": "Berhasil",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "close": "Tutup",
+    "back": "Kembali",
+    "next": "Selanjutnya",
+    "previous": "Sebelumnya",
+    "submit": "Kirim",
+    "reset": "Reset",
+    "confirm": "Konfirmasi",
+    "yes": "Ya",
+    "no": "Tidak"
+  },
+  "navigation": {
+    "home": "Beranda",
+    "demo": "Demo",
+    "examples": "Contoh",
+    "terminal": "Terminal",
+    "flightDemo": "Demo Penerbangan",
+    "destinationDemo": "Demo Destinasi"
+  },
+  "common": {
+    "welcome": "Selamat datang",
+    "hello": "Halo",
+    "goodbye": "Selamat tinggal",
+    "thankYou": "Terima kasih",
+    "please": "Mohon",
+    "sorry": "Maaf",
+    "ok": "OK",
+    "done": "Selesai",
+    "loading": "Memuat...",
+    "error": "Terjadi kesalahan",
+    "success": "Operasi berhasil diselesaikan"
+  },
   "tripTypes": {
     "oneWay": "Sekali jalan",
     "roundTrip": "Pulang pergi",
