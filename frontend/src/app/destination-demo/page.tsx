@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import FlightSearch from "../../components/flight-search-refactored";
 import "../../components/ui/flight-styles.css";
 import { PassengerSelector } from "../../components/passenger-selector";
+import { LanguageSelector } from "../../components/language-selector";
 
 export default function FlightDemoPage() {
   const [fromValue, setFromValue] = useState("Jakarta, Indonesia (JKT)");
@@ -39,6 +40,9 @@ export default function FlightDemoPage() {
 
   // Add state for passenger selector
   const [passengers, setPassengers] = useState({ adults: 1, children: 0, infants: 0 });
+
+  // Add state for language selector
+  const [language, setLanguage] = useState<"ID" | "EN" | "CN">("ID");
 
   const handleSwap = () => {
     const temp = fromValue;
@@ -136,6 +140,8 @@ export default function FlightDemoPage() {
   return (
     <div className="page-wrapper">
       <div className="demo-container">
+        
+        
         {/* New trip type selector with multicity option */}
         <div className="search-wrapper">
           <div style={{ display: "flex", gap: 16, marginBottom: 16, alignItems: "center" }}>
@@ -211,8 +217,9 @@ export default function FlightDemoPage() {
             </>
           )}
 
-          {/* Passenger selector popup dropdown and Search button in the same row */}
+          {/* Language selector, Passenger selector popup dropdown and Search button in the same row */}
           <div style={{ display: "flex", alignItems: "center", gap: 12, width: "100%", justifyContent: "flex-end" }}>
+            <LanguageSelector value={language} onChange={setLanguage} />
             <PassengerSelector value={passengers} onChange={setPassengers} />
             <button
               className="search-button"
