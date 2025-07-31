@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "./ui/popover";
-import { Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface LanguageSelectorProps {

@@ -31,7 +31,7 @@ export const PassengerSelector: React.FC<PassengerSelectorProps> = ({ value, onC
   const handleChange = (type: "adults" | "children" | "infants", delta: number) => {
     setError("");
     setLocal((prev) => {
-      let next = { ...prev };
+      const next = { ...prev };
       if (type === "adults") {
         next.adults = Math.max(1, Math.min(maxAdults, prev.adults + delta));
         if (next.adults > maxAdults) {
