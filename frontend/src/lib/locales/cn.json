@@ -1,0 +1,37 @@
+{
+  "tripTypes": {
+    "oneWay": "单程",
+    "roundTrip": "往返",
+    "multiCity": "多城市"
+  },
+  "search": {
+    "searchFlights": "搜索航班",
+    "searching": "搜索中...",
+    "from": "出发地",
+    "to": "目的地",
+    "departure": "出发",
+    "return": "返回",
+    "passengers": "乘客",
+    "language": "语言"
+  },
+  "passengers": {
+    "adults": "成人",
+    "children": "儿童",
+    "infants": "婴儿",
+    "adultsDesc": ">12岁",
+    "childrenDesc": "2-12岁",
+    "infantsDesc": "<2岁",
+    "apply": "应用"
+  },
+  "languages": {
+    "indonesia": "Indonesia",
+    "english": "English",
+    "chinese": "中文"
+  },
+  "messages": {
+    "searchSuccess": "找到{{count}}个航班！查看控制台了解详情。",
+    "searchFailed": "搜索失败。请重试。",
+    "maxAdultsError": "最多允许5名成人。",
+    "maxChildrenInfantsError": "儿童+婴儿不能超过4人。"
+  }
+} 

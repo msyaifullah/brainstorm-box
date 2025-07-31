@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "./ui/popover";
 import { Button } from "./ui/button";
 import { Plus, Minus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface PassengerSelectorProps {
   value: { adults: number; children: number; infants: number };
@@ -21,6 +22,7 @@ export const PassengerSelector: React.FC<PassengerSelectorProps> = ({ value, onC
   const [open, setOpen] = useState(false);
   const [local, setLocal] = useState(value);
   const [error, setError] = useState("");
+  const { t } = useTranslation();
 
   const maxAdults = 5;
   const maxChildrenInfants = 4;
@@ -33,7 +35,7 @@ export const PassengerSelector: React.FC<PassengerSelectorProps> = ({ value, onC
       if (type === "adults") {
         next.adults = Math.max(1, Math.min(maxAdults, prev.adults + delta));
         if (next.adults > maxAdults) {
-          setError("Maximum 5 adults allowed.");
+          setError(t('messages.maxAdultsError'));
         }
       } else {
         // children or infants
@@ -41,7 +43,7 @@ export const PassengerSelector: React.FC<PassengerSelectorProps> = ({ value, onC
         const newTotal = (type === "children" ? newValue : prev.children) + (type === "infants" ? newValue : prev.infants);
         if (newValue < 0) return prev;
         if (newTotal > maxChildrenInfants) {
-          setError("Children + Infants cannot be more than 4.");
+          setError(t('messages.maxChildrenInfantsError'));
           return prev;
         }
         next[type] = newValue;
@@ -66,8 +68,8 @@ export const PassengerSelector: React.FC<PassengerSelectorProps> = ({ value, onC
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <div>
-              <div className="font-semibold text-gray-900">Adults</div>
-              <div className="text-xs text-gray-600">&gt;12 Years</div>
+              <div className="font-semibold text-gray-900">{t('passengers.adults')}</div>
+              <div className="text-xs text-gray-600">{t('passengers.adultsDesc')}</div>
             </div>
             <div className="flex items-center gap-2">
               <Button
@@ -101,8 +103,8 @@ export const PassengerSelector: React.FC<PassengerSelectorProps> = ({ value, onC
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <div className="font-semibold text-gray-900">Children</div>
-              <div className="text-xs text-gray-600">2-12 Years</div>
+              <div className="font-semibold text-gray-900">{t('passengers.children')}</div>
+              <div className="text-xs text-gray-600">{t('passengers.childrenDesc')}</div>
             </div>
             <div className="flex items-center gap-2">
               <Button
@@ -136,8 +138,8 @@ export const PassengerSelector: React.FC<PassengerSelectorProps> = ({ value, onC
           </div>
           <div className="flex items-center justify-between">
             <div>
-              <div className="font-semibold text-gray-900">Infants</div>
-              <div className="text-xs text-gray-600">&lt;2 Years</div>
+              <div className="font-semibold text-gray-900">{t('passengers.infants')}</div>
+              <div className="text-xs text-gray-600">{t('passengers.infantsDesc')}</div>
             </div>
             <div className="flex items-center gap-2">
               <Button
@@ -174,7 +176,7 @@ export const PassengerSelector: React.FC<PassengerSelectorProps> = ({ value, onC
             onClick={handleApply}
             type="button"
           >
-            Apply
+            {t('passengers.apply')}
           </button>
         </div>
         {error && (

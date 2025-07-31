@@ -1,0 +1,37 @@
+{
+  "tripTypes": {
+    "oneWay": "Sekali jalan",
+    "roundTrip": "Pulang pergi",
+    "multiCity": "Multi kota"
+  },
+  "search": {
+    "searchFlights": "Cari Penerbangan",
+    "searching": "Mencari...",
+    "from": "Dari",
+    "to": "Ke",
+    "departure": "Keberangkatan",
+    "return": "Kembali",
+    "passengers": "Penumpang",
+    "language": "Bahasa"
+  },
+  "passengers": {
+    "adults": "Dewasa",
+    "children": "Anak-anak",
+    "infants": "Bayi",
+    "adultsDesc": ">12 Tahun",
+    "childrenDesc": "2-12 Tahun",
+    "infantsDesc": "<2 Tahun",
+    "apply": "Terapkan"
+  },
+  "languages": {
+    "indonesia": "Indonesia",
+    "english": "English",
+    "chinese": "中文"
+  },
+  "messages": {
+    "searchSuccess": "Ditemukan {{count}} penerbangan! Lihat console untuk detail.",
+    "searchFailed": "Pencarian gagal. Silakan coba lagi.",
+    "maxAdultsError": "Maksimal 5 dewasa diperbolehkan.",
+    "maxChildrenInfantsError": "Anak-anak + Bayi tidak boleh lebih dari 4."
+  }
+} 

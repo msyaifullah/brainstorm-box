@@ -1,13 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import FlightSearch from "../../components/flight-search-refactored";
 import "../../components/ui/flight-styles.css";
 import { PassengerSelector } from "../../components/passenger-selector";
 import { LanguageSelector } from "../../components/language-selector";
+import { I18nProvider } from "../../components/i18n-provider";
 
 export default function FlightDemoPage() {
+  const { t } = useTranslation();
   const [fromValue, setFromValue] = useState("Jakarta, Indonesia (JKT)");
   const [toValue, setToValue] = useState("Kuala Lumpur, Malaysia (KUL)");
   const [departureDate, setDepartureDate] = useState("");
@@ -99,10 +102,10 @@ export default function FlightDemoPage() {
       };
 
       console.log("API Response:", mockResponse);
-      alert(`Found ${mockResponse.data.flights.length} flights! Check console for details.`);
+      alert(t('messages.searchSuccess', { count: mockResponse.data.flights.length }));
     } catch (error) {
       console.error("Search failed:", error);
-      alert("Search failed. Please try again.");
+      alert(t('messages.searchFailed'));
     } finally {
       setIsLoading(false);
     }
@@ -138,10 +141,9 @@ export default function FlightDemoPage() {
   };
 
   return (
-    <div className="page-wrapper">
-      <div className="demo-container">
-        
-        
+    <I18nProvider>
+      <div className="page-wrapper">
+        <div className="demo-container">
         {/* New trip type selector with multicity option */}
         <div className="search-wrapper">
           <div style={{ display: "flex", gap: 16, marginBottom: 16, alignItems: "center" }}>
@@ -158,7 +160,7 @@ export default function FlightDemoPage() {
                 cursor: "pointer",
               }}
             >
-              Sekali jalan
+              {t('tripTypes.oneWay')}
             </button>
             <button
               type="button"
@@ -173,7 +175,7 @@ export default function FlightDemoPage() {
                 cursor: "pointer",
               }}
             >
-              Pulang pergi
+              {t('tripTypes.roundTrip')}
             </button>
             <button
               type="button"
@@ -188,7 +190,7 @@ export default function FlightDemoPage() {
                 cursor: "pointer",
               }}
             >
-              Multi kota
+              {t('tripTypes.multiCity')}
             </button>
           </div>
 
@@ -231,7 +233,7 @@ export default function FlightDemoPage() {
               disabled={isLoading}
               style={{ width: "25%" }}
             >
-              {isLoading ? "Searching..." : "Search Flights"}
+              {isLoading ? t('search.searching') : t('search.searchFlights')}
             </button>
           </div>
         </div>
@@ -367,7 +369,8 @@ export default function FlightDemoPage() {
             font-weight: 600;
           }
         `}</style>
+        </div>
       </div>
-    </div>
+    </I18nProvider>
   );
 }

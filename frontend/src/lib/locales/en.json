@@ -1,0 +1,37 @@
+{
+  "tripTypes": {
+    "oneWay": "One Way",
+    "roundTrip": "Round Trip",
+    "multiCity": "Multi City"
+  },
+  "search": {
+    "searchFlights": "Search Flights",
+    "searching": "Searching...",
+    "from": "From",
+    "to": "To",
+    "departure": "Departure",
+    "return": "Return",
+    "passengers": "Passengers",
+    "language": "Language"
+  },
+  "passengers": {
+    "adults": "Adults",
+    "children": "Children",
+    "infants": "Infants",
+    "adultsDesc": ">12 Years",
+    "childrenDesc": "2-12 Years",
+    "infantsDesc": "<2 Years",
+    "apply": "Apply"
+  },
+  "languages": {
+    "indonesia": "Indonesia",
+    "english": "English",
+    "chinese": "中文"
+  },
+  "messages": {
+    "searchSuccess": "Found {{count}} flights! Check console for details.",
+    "searchFailed": "Search failed. Please try again.",
+    "maxAdultsError": "Maximum 5 adults allowed.",
+    "maxChildrenInfantsError": "Children + Infants cannot be more than 4."
+  }
+} 

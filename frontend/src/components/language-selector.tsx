@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { Popover, PopoverTrigger, PopoverContent } from "./ui/popover";
 import { Globe } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface LanguageSelectorProps {
   value: "ID" | "EN" | "CN";
   onChange: (value: "ID" | "EN" | "CN") => void;
 }
 
-const getLanguageDisplay = (language: "ID" | "EN" | "CN") => {
+const getLanguageDisplay = (language: "ID" | "EN" | "CN", t: (key: string) => string) => {
   switch (language) {
     case "ID":
-      return "Indonesia";
+      return t('languages.indonesia');
     case "EN":
-      return "English";
+      return t('languages.english');
     case "CN":
-      return "中文";
+      return t('languages.chinese');
     default:
-      return "Indonesia";
+      return t('languages.indonesia');
   }
 };
 
@@ -35,8 +36,20 @@ const getLanguageFlag = (language: "ID" | "EN" | "CN") => {
 
 export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onChange }) => {
   const [open, setOpen] = useState(false);
+  const { t, i18n } = useTranslation();
 
   const handleLanguageSelect = (language: "ID" | "EN" | "CN") => {
+    // Map our language codes to i18next language codes
+    const languageMap = {
+      "ID": "id",
+      "EN": "en", 
+      "CN": "cn"
+    };
+    
+    // Change the language if i18n is available
+    if (i18n && typeof i18n.changeLanguage === 'function') {
+      i18n.changeLanguage(languageMap[language]);
+    }
     onChange(language);
     setOpen(false);
   };
@@ -50,7 +63,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onCha
         >
           <div className="flex items-center gap-2">
             <span className="text-lg">{getLanguageFlag(value)}</span>
-            <span className="font-medium">{getLanguageDisplay(value)}</span>
+            <span className="font-medium">{getLanguageDisplay(value, t)}</span>
           </div>
           
         </button>
@@ -65,7 +78,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onCha
             onClick={() => handleLanguageSelect("ID")}
           >
             <span className="text-lg">🇮🇩</span>
-            <span className="font-medium">Indonesia</span>
+            <span className="font-medium">{t('languages.indonesia')}</span>
           </button>
           <button
             type="button"
@@ -75,7 +88,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onCha
             onClick={() => handleLanguageSelect("EN")}
           >
             <span className="text-lg">🇺🇸</span>
-            <span className="font-medium">English</span>
+            <span className="font-medium">{t('languages.english')}</span>
           </button>
           <button
             type="button"
@@ -85,7 +98,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ value, onCha
             onClick={() => handleLanguageSelect("CN")}
           >
             <span className="text-lg">🇨🇳</span>
-            <span className="font-medium">中文</span>
+            <span className="font-medium">{t('languages.chinese')}</span>
           </button>
         </div>
       </PopoverContent>
