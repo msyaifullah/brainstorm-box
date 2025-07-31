@@ -3,17 +3,17 @@ declare module '*.json' {
   export default value;
 }
 
-declare module './locales/en.json' {
+declare module '../../locales/en.json' {
   const value: any;
   export default value;
 }
 
-declare module './locales/id.json' {
+declare module '../../locales/id.json' {
   const value: any;
   export default value;
 }
 
-declare module './locales/cn.json' {
+declare module '../../locales/cn.json' {
   const value: any;
   export default value;
 } 
