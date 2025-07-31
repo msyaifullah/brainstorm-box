@@ -9,12 +9,12 @@ interface PassengerSelectorProps {
   onChange: (value: { adults: number; children: number; infants: number }) => void;
 }
 
-const getSummary = (adults: number, children: number, infants: number) => {
-  let summary = `${adults} Adult${adults > 1 ? "s" : ""}`;
-  if (children > 0) summary += `, ${children} Child${children > 1 ? "ren" : ""}`;
-  if (infants > 0) summary += `, ${infants} Infant${infants > 1 ? "s" : ""}`;
-  return summary;
-};
+// const getSummary = (adults: number, children: number, infants: number) => {
+//   let summary = `${adults} Adult${adults > 1 ? "s" : ""}`;
+//   if (children > 0) summary += `, ${children} Child${children > 1 ? "ren" : ""}`;
+//   if (infants > 0) summary += `, ${infants} Infant${infants > 1 ? "s" : ""}`;
+//   return summary;
+// };
 
 const getTotalPassengers = (adults: number, children: number, infants: number) => adults + children + infants;
 
