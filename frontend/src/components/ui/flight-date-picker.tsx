@@ -112,30 +112,32 @@ export const RoundTripDatePicker: React.FC<RoundTripDatePickerProps> = ({
 
   return (
     <div className={`flight-date-picker-group ${className}`}>
-      <div className="flight-input__container">
-        <div className="flight-input__wrapper">
-          <button                
-            id="departure-date"
-            className={cn(
-              "flight-date-input h-full w-full justify-start text-left font-normal",
-              !departureDateState && "text-muted-foreground",
-              departureClassName,
-              focusedInput === "departure" ? "flight-date-input--focused" : ""
-            )}
-            onFocus={handleDepartureFocus}
-            onBlur={onDepartureBlur}
-          >                
-            {displayDepartureValue}
-          </button>
-          <label htmlFor="departure-date" className="flight-input__label">
-            Berangkat
-          </label>
+      <Popover open={open} onOpenChange={setOpen}>
+        <div className="flight-input__container">
+          <div className="flight-input__wrapper">
+            <PopoverTrigger asChild>
+              <button                
+                id="departure-date"
+                className={cn(
+                  "flight-date-input h-full w-full justify-start text-left font-normal",
+                  !departureDateState && "text-muted-foreground",
+                  departureClassName,
+                  focusedInput === "departure" ? "flight-date-input--focused" : ""
+                )}
+                onFocus={handleDepartureFocus}
+                onBlur={onDepartureBlur}
+              >                
+                {displayDepartureValue}
+              </button>
+            </PopoverTrigger>
+            <label htmlFor="departure-date" className="flight-input__label">
+              Berangkat
+            </label>
+          </div>
         </div>
-      </div>
 
-      <div className="flight-input__container">
-        <div className="flight-input__wrapper">
-          <Popover open={open} onOpenChange={setOpen}>
+        <div className="flight-input__container">
+          <div className="flight-input__wrapper">
             <PopoverTrigger asChild>
               <button                
                 id="return-date"
@@ -151,32 +153,33 @@ export const RoundTripDatePicker: React.FC<RoundTripDatePickerProps> = ({
                 {displayReturnValue}
               </button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 bg-white text-black border-none" align="end">
-              <CalendarFlight
-                mode="range" 
-                numberOfMonths={2}       
-                selected={dateRange}
-                onSelect={handleRangeSelect}
-                disabled={(date) => {
-                  if (min) {
-                    const minDate = new Date(min);
-                    if (date < minDate) return true;
-                  }
-                  if (max) {
-                    const maxDate = new Date(max);
-                    if (date > maxDate) return true;
-                  }
-                  return false;
-                }}
-                className="rounded-md"
-              />
-            </PopoverContent>
-          </Popover>
-          <label htmlFor="return-date" className="flight-input__label">
-            Pulang Pergi
-          </label>
+            <label htmlFor="return-date" className="flight-input__label">
+              Pulang Pergi
+            </label>
+          </div>
         </div>
-      </div>
+
+        <PopoverContent className="w-auto p-0 bg-white text-black border-none" align="end">
+          <CalendarFlight
+            mode="range" 
+            numberOfMonths={2}       
+            selected={dateRange}
+            onSelect={handleRangeSelect}
+            disabled={(date) => {
+              if (min) {
+                const minDate = new Date(min);
+                if (date < minDate) return true;
+              }
+              if (max) {
+                const maxDate = new Date(max);
+                if (date > maxDate) return true;
+              }
+              return false;
+            }}
+            className="rounded-md"
+          />
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
