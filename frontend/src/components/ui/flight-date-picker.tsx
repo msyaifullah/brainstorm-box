@@ -59,7 +59,7 @@ export const RoundTripDatePicker: React.FC<RoundTripDatePickerProps> = ({
   max,
 }) => {
   const [open, setOpen] = useState(false);
-  const [activeInput, setActiveInput] = useState<"departure" | "return">("departure");
+  
   const [departureDateState, setDepartureDateState] = useState<Date | undefined>(
     departureDate ? new Date(departureDate) : undefined
   );
@@ -90,14 +90,12 @@ export const RoundTripDatePicker: React.FC<RoundTripDatePickerProps> = ({
     setOpen(false);
   };
 
-  const handleDepartureFocus = () => {
-    setActiveInput("departure");
+  const handleDepartureFocus = () => {    
     setOpen(true);
     onDepartureFocus?.();
   };
 
   const handleReturnFocus = () => {
-    setActiveInput("return");
     setOpen(true);
     onReturnFocus?.();
   };
