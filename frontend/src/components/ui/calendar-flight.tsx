@@ -44,7 +44,7 @@ function CalendarFlight({
         day_range_end: "day-range-end bg-blue-600 text-white rounded-md",
         day_selected:
           "bg-blue-600 text-white rounded-md hover:bg-blue-600 hover:text-white focus:bg-blue-600 focus:text-white",
-        day_today: "bg-blue-600 text-white rounded-md",
+        day_today: "bg-blue-100 text-blue-600 !font-bold rounded-md",
         day_outside:
           "day-outside text-muted-foreground aria-selected:bg-accent/50 aria-selected:text-muted-foreground",
         day_disabled: "text-muted-foreground opacity-50",
