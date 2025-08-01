@@ -127,6 +127,11 @@ const DateDrawer: React.FC<DateDrawerProps> = ({
                 selected={selected as Date}
                 onSelect={handleSingleDateSelect}
                 disabled={(date) => {
+                  // Always prevent past dates for departure
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  if (date < today) return true;
+                  
                   if (min) {
                     const minDate = new Date(min);
                     if (date < minDate) return true;
@@ -146,6 +151,11 @@ const DateDrawer: React.FC<DateDrawerProps> = ({
                 selected={selected as DateRange}
                 onSelect={handleRangeDateSelect}
                 disabled={(date) => {
+                  // Always prevent past dates for departure
+                  const today = new Date();
+                  today.setHours(0, 0, 0, 0);
+                  if (date < today) return true;
+                  
                   if (min) {
                     const minDate = new Date(min);
                     if (date < minDate) return true;
@@ -218,6 +228,11 @@ const DateDropdown: React.FC<DateDropdownProps> = ({
             selected={selected as Date}
             onSelect={onSelect as (date: Date | undefined) => void}
             disabled={(date) => {
+              // Always prevent past dates for departure
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              if (date < today) return true;
+              
               if (min) {
                 const minDate = new Date(min);
                 if (date < minDate) return true;
@@ -237,6 +252,11 @@ const DateDropdown: React.FC<DateDropdownProps> = ({
             selected={selected as DateRange}
             onSelect={onSelect as (date: DateRange | undefined) => void}
             disabled={(date) => {
+              // Always prevent past dates for departure
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              if (date < today) return true;
+              
               if (min) {
                 const minDate = new Date(min);
                 if (date < minDate) return true;
