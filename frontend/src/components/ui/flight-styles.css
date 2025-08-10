@@ -238,6 +238,7 @@
   border: 1px solid #dfdfdf;
   background: white;
   position: relative;
+  transition: border-color 0.15s ease-out;
 }
 
 .flight-date-picker-group:hover {
@@ -248,14 +249,13 @@
   width: 50%;
   border: none;
   background: none;
+  position: relative;
 }
 
 .flight-date-picker-group .flight-input__container:first-child .flight-input__wrapper {
   border-radius: 8px 0 0 8px;
   position: relative;
 }
-
-
 
 .flight-date-picker-group .flight-input__container:last-child .flight-input__wrapper {
   border-radius: 0 8px 8px 0;
@@ -266,6 +266,9 @@
   border: none;
   border-radius: 0;
   background: none;
+  position: relative;
+  z-index: 1;
+  transition: all 0.15s ease-out;
 }
 
 .flight-date-picker-group .flight-input__container:first-child .flight-date-input {
@@ -274,6 +277,29 @@
 
 .flight-date-picker-group .flight-input__container:last-child .flight-date-input {
   border-radius: 0 8px 8px 0;
+}
+
+/* Focus states with blue glow */
+.flight-date-picker-group .flight-date-input--focused {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5), 0 0 0 4px rgba(59, 130, 246, 0.2);
+  z-index: 2;
+}
+
+.flight-date-picker-group .flight-input__container:first-child .flight-date-input--focused {
+  box-shadow: 2px 0 0 2px rgba(59, 130, 246, 0.5), 4px 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+.flight-date-picker-group .flight-input__container:last-child .flight-date-input--focused {
+  box-shadow: -2px 0 0 2px rgba(59, 130, 246, 0.5), -4px 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+/* Hover effect that works with connected buttons */
+.flight-date-picker-group:hover .flight-date-input {
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.flight-date-picker-group .flight-date-input--focused:hover {
+  background-color: rgba(59, 130, 246, 0.1);
 }
 
 
@@ -689,20 +715,24 @@
     border: 1px solid #dfdfdf;
     border-radius: 8px;
     overflow: hidden;
+    transition: border-color 0.15s ease-out;
+  }
+
+  .flight-date-picker-group:hover {
+    border-color: #9c9c9c;
   }
 
   .flight-date-picker-group .flight-input__container {
     width: 100%;
     border: none;
     background: none;
+    position: relative;
   }
 
   .flight-date-picker-group .flight-input__container:first-child .flight-input__wrapper {
     border-radius: 8px 8px 0 0;
     position: relative;
   }
-
-
 
   .flight-date-picker-group .flight-input__container:last-child .flight-input__wrapper {
     border-radius: 0 0 8px 8px;
@@ -713,6 +743,9 @@
     border: none;
     border-radius: 0;
     background: none;
+    position: relative;
+    z-index: 1;
+    transition: all 0.15s ease-out;
   }
 
   .flight-date-picker-group .flight-input__container:first-child .flight-date-input {
@@ -721,6 +754,29 @@
 
   .flight-date-picker-group .flight-input__container:last-child .flight-date-input {
     border-radius: 0 0 8px 8px;
+  }
+
+  /* Mobile focus states with blue glow */
+  .flight-date-picker-group .flight-date-input--focused {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5), 0 0 0 4px rgba(59, 130, 246, 0.2);
+    z-index: 2;
+  }
+
+  .flight-date-picker-group .flight-input__container:first-child .flight-date-input--focused {
+    box-shadow: 0 2px 0 2px rgba(59, 130, 246, 0.5), 0 4px 0 4px rgba(59, 130, 246, 0.2);
+  }
+
+  .flight-date-picker-group .flight-input__container:last-child .flight-date-input--focused {
+    box-shadow: 0 -2px 0 2px rgba(59, 130, 246, 0.5), 0 -4px 0 4px rgba(59, 130, 246, 0.2);
+  }
+
+  /* Mobile hover effect that works with connected buttons */
+  .flight-date-picker-group:hover .flight-date-input {
+    background-color: rgba(59, 130, 246, 0.05);
+  }
+
+  .flight-date-picker-group .flight-date-input--focused:hover {
+    background-color: rgba(59, 130, 246, 0.1);
   }
 
 

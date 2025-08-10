@@ -287,7 +287,7 @@ export const RoundTripDatePicker: React.FC<RoundTripDatePickerProps> = ({
   className = "",
   departureClassName = "",
   returnClassName = "",
-  focusedInput,
+  
   min,
   max,
 }) => {
@@ -322,13 +322,20 @@ export const RoundTripDatePicker: React.FC<RoundTripDatePickerProps> = ({
     : undefined;
 
   const handleRangeSelect = (range: DateRange | undefined) => {
+    console.log("range", range);
+    console.log("state departure", departureDateState);
+    console.log("state return", returnDateState);
+    
+
     if (range?.from) {
+      console.log("range from", range.from);
       const formattedDepartureDate = format(range.from, "yyyy-MM-dd");
       setDepartureDateState(range.from);
       onDepartureDateChange(formattedDepartureDate);
     }
     
     if (range?.to) {
+      console.log("range to", range.to);
       const formattedReturnDate = format(range.to, "yyyy-MM-dd");
       setReturnDateState(range.to);
       onReturnDateChange(formattedReturnDate);
@@ -342,6 +349,11 @@ export const RoundTripDatePicker: React.FC<RoundTripDatePickerProps> = ({
   };
 
   const handleDepartureFocus = () => {    
+    console.log("handleDepartureFocus");
+    console.log("state departure", departureDateState);
+    console.log("state return", returnDateState);
+    
+
     setActiveInput("departure");
     if (isMobile) {
       setShowDrawer(true);
@@ -352,6 +364,11 @@ export const RoundTripDatePicker: React.FC<RoundTripDatePickerProps> = ({
   };
 
   const handleReturnFocus = () => {
+    console.log("handleReturnFocus");
+    console.log("state departure", departureDateState);
+    console.log("state return", returnDateState);
+    
+
     setActiveInput("return");
     if (isMobile) {
       setShowDrawer(true);
@@ -388,7 +405,7 @@ export const RoundTripDatePicker: React.FC<RoundTripDatePickerProps> = ({
               "flight-date-input h-full w-full justify-start text-left font-normal",
               !departureDateState && "text-muted-foreground",
               departureClassName,
-              focusedInput === "departure" ? "flight-date-input--focused" : ""
+              activeInput === "departure" ? "flight-date-input--focused" : ""
             )}
             onFocus={handleDepartureFocus}
             onBlur={onDepartureBlur}
@@ -409,7 +426,7 @@ export const RoundTripDatePicker: React.FC<RoundTripDatePickerProps> = ({
               "flight-date-input h-full w-full justify-start text-left font-normal",
               !returnDateState && "text-muted-foreground",
               returnClassName,
-              focusedInput === "return" ? "flight-date-input--focused" : ""
+              activeInput === "return" ? "flight-date-input--focused" : ""
             )}
             onFocus={handleReturnFocus}
             onBlur={onReturnBlur}
